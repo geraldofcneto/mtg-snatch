@@ -1,0 +1,31 @@
+<label>Name</label>
+<input ng-change="loadCardNames()" ng-model="query.name" ng-model-options='{ debounce: 1000 }'>
+
+<ui-select ng-model="query.set" theme="selectize" style="width: 300px;" title="Choose card set" ng-change="loadCardNames()">
+	<ui-select-match placeholder="Select or search card set...">
+		[{{$select.selected.code}}] {{$select.selected.name}} {{$select.selected.block? '- ' + $select.selected.block : ''}}
+	</ui-select-match>
+	<ui-select-choices repeat="set.code as set in sets | filter: $select.search">
+		[{{set.code}}] {{set.name}} {{set.block? '- ' + set.block : ''}}
+	</ui-select-choices>
+</ui-select>
+
+<ui-select ng-model="query.type" theme="selectize" style="width: 300px;" title="Choose card types" ng-change="loadCardNames()">
+	<ui-select-match placeholder="Select or search card types...">{{$select.selected}}</ui-select-match>
+	<ui-select-choices repeat="type in types | filter: $select.search">
+		{{type}}
+	</ui-select-choices>
+</ui-select>
+
+<ui-select ng-model="query.subtype" theme="selectize" style="width: 300px;" title="Choose card subtypes" ng-change="loadCardNames()">
+	<ui-select-match placeholder="Select or search card subtypes...">{{$select.selected}}</ui-select-match>
+	<ui-select-choices repeat="subtype in subtypes | filter: $select.search">
+		{{subtype}}
+	</ui-select-choices>
+</ui-select>
+
+<div ng-repeat="card in loadedCards">
+	<div class="floatCard">
+		<img ng-src="{{card.imageUrl}}" />
+	</div>
+</div>
