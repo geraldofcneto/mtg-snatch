@@ -10,13 +10,8 @@
 angular.module('mtgSnatchApp')
   .controller('CardsCtrl', function ($scope, $http) {
     function loadCardNames() {
-      // if ($scope.query.name.length < 5) {
-      //   return;
-      // }
-      
       $http.get('http://localhost:8888/card/' + query())
         .then(function (response) {
-          console.log(response.data);
           var cards = response.data.slice(0, 100);
           $scope.loadedCards = cards;
         });
@@ -25,11 +20,10 @@ angular.module('mtgSnatchApp')
     function loadSets() {
       $http.get('http://localhost:8888/set')
         .then(function (response) {
-          console.log(response.data);
           $scope.sets = response.data;
         });
     }
-    
+
     function loadTypes() {
       $http.get('http://localhost:8888/type')
         .then(function (response) {
@@ -41,6 +35,13 @@ angular.module('mtgSnatchApp')
       $http.get('http://localhost:8888/subtype')
         .then(function (response) {
           $scope.subtypes = response.data;
+        });
+    }
+
+    function loadLegalities() {
+      $http.get('http://localhost:8888/legality')
+        .then(function (response) {
+          $scope.legalities = response.data;
         });
     }
 
@@ -62,13 +63,14 @@ angular.module('mtgSnatchApp')
 
     $scope.loadCardNames = loadCardNames;
 
-    $scope.query = { name: '', set: '', type: '', subtype: '' };
+    $scope.query = { name: '', set: '', type: '', subtype: '', legality: '' };
     $scope.sets = [];
     $scope.types = [];
     $scope.subtypes = [];
-    
+
     loadSets();
     loadTypes();
     loadSubtypes();
+    loadLegalities();
 
   });

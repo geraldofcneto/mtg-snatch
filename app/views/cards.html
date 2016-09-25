@@ -24,6 +24,13 @@
 	</ui-select-choices>
 </ui-select>
 
+<ui-select ng-model="query.legality" theme="selectize" style="width: 300px;" title="Choose card legality" ng-change="loadCardNames()">
+	<ui-select-match placeholder="Select or search card legality...">{{$select.selected}}</ui-select-match>
+	<ui-select-choices repeat="legality in legalities | filter: $select.search">
+		{{legality}}
+	</ui-select-choices>
+</ui-select>
+
 <div ng-repeat="card in loadedCards">
 	<div class="floatCard">
 		<img ng-src="{{card.imageUrl}}" />
