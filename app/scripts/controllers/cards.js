@@ -15,6 +15,7 @@ angular.module('mtgSnatchApp')
       $http.get(server + 'card/' + query())
         .then(function (response) {
           var cards = response.data;
+          console.log(cards);
           $scope.loadedCards = cards;
         });
     }
@@ -50,7 +51,6 @@ angular.module('mtgSnatchApp')
     function loadColors() {
       $http.get(server + 'color')
         .then(function (response) {
-          console.log(response);
           $scope.colors = response.data;
         });
     }
@@ -63,9 +63,8 @@ angular.module('mtgSnatchApp')
 
     function joinQuery() {
       return Object.keys($scope.query).map(function (key) {
-        return $scope.query[key] !== null
-          && $scope.query[key] !== undefined
-          && $scope.query[key] !== '' 
+        return !!$scope.query[key]
+          && !!$scope.query[key].length
           ? key + '=' + $scope.query[key] : '';
       })
         .filter(function (element) {
