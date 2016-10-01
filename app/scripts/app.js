@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.select'
+    'ui.select',
+    'afkl.lazyImage'
   ])
   .config(function ($routeProvider) {
     $routeProvider
