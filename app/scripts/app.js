@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.select',
-    'afkl.lazyImage'
+    'afkl.lazyImage',
+    'environment'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -44,4 +45,35 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .config(function(envServiceProvider) {
+    // set the domains and variables for each environment 
+    envServiceProvider.config({
+      domains: {
+        development: ['localhost', 'dev.local'],
+        c9: ['mtg-snatch-geraldofcneto.c9users.io'],
+        production: ['acme.com', 'acme.net', 'acme.org']
+      },
+      vars: {
+        development: {
+          apiUrl: '//localhost:8888/',
+          staticUrl: '//localhost/static'
+          // antoherCustomVar: 'lorem', 
+          // antoherCustomVar: 'ipsum' 
+          },
+        production: {
+          apiUrl: '//api.acme.com/v2',
+          staticUrl: '//static.acme.com'
+          // antoherCustomVar: 'lorem', 
+          // antoherCustomVar: 'ipsum' 
+        },
+        c9: {
+          apiUrl: '//mtg-collection-geraldofcneto.c9users.io/'
+        }
+      }
+    });
+
+    // run the environment check, so the comprobation is made 
+    // before controllers and services are built 
+    envServiceProvider.check();
   });

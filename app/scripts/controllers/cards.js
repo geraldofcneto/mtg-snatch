@@ -8,38 +8,41 @@
  * Controller of the mtgSnatchApp
  */
 angular.module('mtgSnatchApp')
-  .controller('CardsCtrl', function ($scope, $http) {
+  .controller('CardsCtrl', function ($scope, $http, envService) {
+    var server = envService.read('apiUrl');
+    
+    console.log(envService);
     function loadCardNames() {
-      $http.get('http://localhost:8888/card/' + query())
+      $http.get(server + 'card/' + query())
         .then(function (response) {
-          var cards = response.data.slice(0, 100);
+          var cards = response.data;
           $scope.loadedCards = cards;
         });
     }
 
     function loadSets() {
-      $http.get('http://localhost:8888/set')
+      $http.get(server + 'set')
         .then(function (response) {
           $scope.sets = response.data;
         });
     }
 
     function loadTypes() {
-      $http.get('http://localhost:8888/type')
+      $http.get(server + 'type')
         .then(function (response) {
           $scope.types = response.data;
         });
     }
 
     function loadSubtypes() {
-      $http.get('http://localhost:8888/subtype')
+      $http.get(server + 'subtype')
         .then(function (response) {
           $scope.subtypes = response.data;
         });
     }
 
     function loadLegalities() {
-      $http.get('http://localhost:8888/legality')
+      $http.get(server + 'legality')
         .then(function (response) {
           $scope.legalities = response.data;
         });
