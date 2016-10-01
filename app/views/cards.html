@@ -10,6 +10,13 @@
 	</ui-select-choices>
 </ui-select>
 
+<ui-select ng-model="query.color" theme="selectize" style="width: 300px;" title="Choose card colors" ng-change="loadCardNames()">
+	<ui-select-match placeholder="Select or search card colors...">{{$select.selected.name}}</ui-select-match>
+	<ui-select-choices repeat="color.symbol as color in colors | filter: $select.search">
+		{{color.name}}
+	</ui-select-choices>
+</ui-select>
+
 <ui-select ng-model="query.type" theme="selectize" style="width: 300px;" title="Choose card types" ng-change="loadCardNames()">
 	<ui-select-match placeholder="Select or search card types...">{{$select.selected}}</ui-select-match>
 	<ui-select-choices repeat="type in types | filter: $select.search">
@@ -31,7 +38,7 @@
 	</ui-select-choices>
 </ui-select>
 
-<div ng-repeat="card in loadedCards" class="card-image float-card">
+<div ng-repeat="card in loadedCards | filter: hasImage " class="card-image float-card">
 	<div afkl-lazy-image="{{card.imageUrl}}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname" 
 	afkl-lazy-image-options='{imgAttrs: [{alt: "{{card.name}}"}]}' ></div>
 </div>

@@ -11,7 +11,6 @@ angular.module('mtgSnatchApp')
   .controller('CardsCtrl', function ($scope, $http, envService) {
     var server = envService.read('apiUrl');
     
-    console.log(envService);
     function loadCardNames() {
       $http.get(server + 'card/' + query())
         .then(function (response) {
@@ -47,6 +46,14 @@ angular.module('mtgSnatchApp')
           $scope.legalities = response.data;
         });
     }
+    
+    function loadColors() {
+      $http.get(server + 'color')
+        .then(function (response) {
+          console.log(response);
+          $scope.colors = response.data;
+        });
+    }
 
     function query() {
       var q = '?' + joinQuery();
@@ -56,7 +63,10 @@ angular.module('mtgSnatchApp')
 
     function joinQuery() {
       return Object.keys($scope.query).map(function (key) {
-        return $scope.query[key] !== null && $scope.query[key] !== '' ? key + '=' + $scope.query[key] : '';
+        return $scope.query[key] !== null
+          && $scope.query[key] !== undefined
+          && $scope.query[key] !== '' 
+          ? key + '=' + $scope.query[key] : '';
       })
         .filter(function (element) {
           return element !== '';
@@ -64,16 +74,27 @@ angular.module('mtgSnatchApp')
         .join('&');
     }
 
+    function hasImage(card){
+      return card.imageUrl !== null 
+        && card.imageUrl !== undefined
+        && card.imageUrl !== '';
+    }
+    
     $scope.loadCardNames = loadCardNames;
+    $scope.hasImage = hasImage;
 
-    $scope.query = { name: '', set: '', type: '', subtype: '', legality: '' };
+    $scope.query = { name: '', set: '', type: '', subtype: '', legality: '', color: ''};
     $scope.sets = [];
     $scope.types = [];
     $scope.subtypes = [];
+    $scope.legalities = [];
+    $scope.colors = [];
+    
 
     loadSets();
     loadTypes();
     loadSubtypes();
     loadLegalities();
+    loadColors();
 
   });
