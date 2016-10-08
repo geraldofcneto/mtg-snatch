@@ -15,8 +15,8 @@ angular.module('mtgSnatchApp')
       $http.get(server + 'card/' + query())
         .then(function (response) {
           var cards = response.data;
-          console.log(cards);
-          $scope.loadedCards = cards;
+          $scope.loadedCards = cards.slice(0, 1000);
+          updateLoadedCards();
         });
     }
 
@@ -79,9 +79,33 @@ angular.module('mtgSnatchApp')
         && card.imageUrl !== '';
     }
     
+    function addToCollection(id){
+      var numberOfCards = $scope.collection.get(id) || 0;
+      $scope.collection.set(id, numberOfCards+1);
+      updateLoadedCards();
+    }
+    
+    function removeFromCollection(id){
+      var numberOfCards = $scope.collection.get(id) || 0;
+      if (numberOfCards) {
+        $scope.collection.set(id, numberOfCards-1);
+        updateLoadedCards();
+      }
+    }
+    
+    function updateLoadedCards() {
+      $scope.loadedCards.forEach(function (card){
+        if (card.have != $scope.collection.get(card.id)){
+          card.have = $scope.collection.get(card.id);
+        }
+      });
+    }
+    
     $scope.loadCardNames = loadCardNames;
     $scope.hasImage = hasImage;
-
+    $scope.addToCollection = addToCollection;
+    $scope.removeFromCollection =removeFromCollection;
+    
     $scope.query = { name: '', set: '', type: '', subtype: '', legality: '', color: ''};
     $scope.sets = [];
     $scope.types = [];
@@ -89,6 +113,7 @@ angular.module('mtgSnatchApp')
     $scope.legalities = [];
     $scope.colors = [];
     
+    $scope.collection = new Map();
 
     loadSets();
     loadTypes();

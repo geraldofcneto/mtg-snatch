@@ -88,3 +88,14 @@ body {
   width: 223px;
   height: 311px;
 }
+.collection-overlay {
+  position: absolute;
+  padding-top: 30px;
+  padding-left: 10px;
+}
+.collection-have,
+.collection-want,
+.collection-trade {
+  display: block;
+  margin: 10px;
+}
