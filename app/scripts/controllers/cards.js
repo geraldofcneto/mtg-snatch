@@ -12,15 +12,14 @@ angular.module('mtgSnatchApp')
     var server = envService.read('apiUrl');
     
     function loadCardNames() {
-      $http.get(server + 'card/' + query())
+      if (!query().length) { return; }
+      $http.get(server + 'card/?' + query())
         .then(function (response) {
-          var cards = response.data.slice(0, 1000);
-          var mappedCards = new Map();
-          cards.forEach(function (card){
-            mappedCards.set(card.id, card);
+          $scope.loadedCards = response.data.slice(0, 1000);
+          $scope.mappedCards = new Map();
+          $scope.loadedCards.forEach(function (card){
+            $scope.mappedCards.set(card.id, card);
           });
-          $scope.loadedCards = cards;
-          $scope.mappedCards = mappedCards;
           updateLoadedCards();
         });
     }
@@ -61,16 +60,8 @@ angular.module('mtgSnatchApp')
     }
 
     function query() {
-      var q = '?' + joinQuery();
-      console.log(q);
-      return q;
-    }
-
-    function joinQuery() {
       return Object.keys($scope.query).map(function (key) {
-        return !!$scope.query[key]
-          && !!$scope.query[key].length
-          ? key + '=' + $scope.query[key] : '';
+        return !!$scope.query[key] && !!$scope.query[key].length ? key + '=' + $scope.query[key] : '';
       })
         .filter(function (element) {
           return element !== '';
@@ -79,9 +70,7 @@ angular.module('mtgSnatchApp')
     }
 
     function hasImage(card){
-      return card.imageUrl !== null 
-        && card.imageUrl !== undefined
-        && card.imageUrl !== '';
+      return card.imageUrl !== null && card.imageUrl !== undefined && card.imageUrl !== '';
     }
     
     function addToCollection(id){
@@ -100,7 +89,7 @@ angular.module('mtgSnatchApp')
     
     function updateLoadedCards() {
       $scope.loadedCards.forEach(function (card){
-        if (card.have != $scope.collection.get(card.id)){
+        if (card.have !== $scope.collection.get(card.id)){
           card.have = $scope.collection.get(card.id);
         }
       });
