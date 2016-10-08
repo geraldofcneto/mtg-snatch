@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-select/dist/select.js',
       'bower_components/ng-directive-lazy-image/release/lazy-image.js',
       'bower_components/angular-environment/dist/angular-environment.js',
+      'bower_components/angular-toArrayFilter/toArrayFilter.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

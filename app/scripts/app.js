@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'ui.select',
     'afkl.lazyImage',
-    'environment'
+    'environment',
+    'angular-toArrayFilter'
   ])
   .config(function ($routeProvider) {
     $routeProvider

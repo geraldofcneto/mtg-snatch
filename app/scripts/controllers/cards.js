@@ -14,8 +14,13 @@ angular.module('mtgSnatchApp')
     function loadCardNames() {
       $http.get(server + 'card/' + query())
         .then(function (response) {
-          var cards = response.data;
-          $scope.loadedCards = cards.slice(0, 1000);
+          var cards = response.data.slice(0, 1000);
+          var mappedCards = new Map();
+          cards.forEach(function (card){
+            mappedCards.set(card.id, card);
+          });
+          $scope.loadedCards = cards;
+          $scope.mappedCards = mappedCards;
           updateLoadedCards();
         });
     }
@@ -80,16 +85,16 @@ angular.module('mtgSnatchApp')
     }
     
     function addToCollection(id){
-      var numberOfCards = $scope.collection.get(id) || 0;
-      $scope.collection.set(id, numberOfCards+1);
-      updateLoadedCards();
+      var numberOfCards = ($scope.collection.get(id) || 0) + 1;
+      $scope.collection.set(id, numberOfCards);
+      $scope.mappedCards.get(id).have = numberOfCards;
     }
     
     function removeFromCollection(id){
       var numberOfCards = $scope.collection.get(id) || 0;
       if (numberOfCards) {
-        $scope.collection.set(id, numberOfCards-1);
-        updateLoadedCards();
+        $scope.collection.set(id, numberOfCards - 1);
+        $scope.mappedCards.get(id).have = numberOfCards - 1 ;
       }
     }
     
