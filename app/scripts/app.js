@@ -63,7 +63,7 @@ angular
           // antoherCustomVar: 'ipsum' 
           },
         production: {
-          apiUrl: '//ec2-54-218-155-189.us-west-2.compute.amazonaws.com:9000/',
+          apiUrl: '//ec2-54-218-155-189.us-west-2.compute.amazonaws.com/',
           staticUrl: '//static.acme.com'
           // antoherCustomVar: 'lorem', 
           // antoherCustomVar: 'ipsum' 
