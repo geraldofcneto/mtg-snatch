@@ -53,7 +53,7 @@ angular
       domains: {
         development: ['localhost', 'dev.local'],
         c9: ['mtg-snatch-geraldofcneto.c9users.io'],
-        production: ['acme.com', 'acme.net', 'acme.org']
+        production: ['geraldofcneto.github.io/mtg-snatch', 'acme.net', 'acme.org']
       },
       vars: {
         development: {
@@ -63,7 +63,7 @@ angular
           // antoherCustomVar: 'ipsum' 
           },
         production: {
-          apiUrl: '//api.acme.com/v2',
+          apiUrl: '//ec2-54-218-155-189.us-west-2.compute.amazonaws.com:9000/',
           staticUrl: '//static.acme.com'
           // antoherCustomVar: 'lorem', 
           // antoherCustomVar: 'ipsum' 
