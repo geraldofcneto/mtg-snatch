@@ -25,11 +25,26 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+  grunt.loadNpmTasks('grunt-aws');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
     // Project settings
     yeoman: appConfig,
+
+    aws: grunt.file.readJSON("aws-credentials.json"),
+    s3: {
+      options: {
+        accessKeyId: "<%= aws.accessKeyId %>",
+        secretAccessKey: "<%= aws.secretAccessKey %>",
+        bucket: "mtg-snatch2"
+      },
+      build: {
+        cwd: "dist/",
+        src: "**"
+      }
+    },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -480,4 +495,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+  
+  grunt.registerTask('ss3', ['build', 's3']);
 };
