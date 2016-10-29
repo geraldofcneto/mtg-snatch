@@ -21,6 +21,13 @@
 	</ui-select-choices>
 </ui-select>
 
+<ui-select multiple ng-model="query.rarity" theme="bootstrap" style="width: 300px;" title="Choose card rarity" ng-change="onQueryChange()">
+	<ui-select-match placeholder="Select or search card rarity...">{{$item}}</ui-select-match>
+	<ui-select-choices repeat="rarity in rarities | filter: $select.search">
+		{{rarity}}
+	</ui-select-choices>
+</ui-select>
+
 <ui-select multiple ng-model="query.type" theme="bootstrap" style="width: 300px;" title="Choose card types" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card types...">{{$item}}</ui-select-match>
 	<ui-select-choices repeat="type in types | filter: $select.search">

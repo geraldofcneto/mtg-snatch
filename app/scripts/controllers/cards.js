@@ -64,6 +64,14 @@ angular.module('mtgSnatchApp')
           $scope.colors = response.data;
         });
     }
+    
+    function loadRarities() {
+      $http.get(server + 'rarity')
+        .then(function (response) {
+          console.log(response, response.data);
+          $scope.rarities = response.data;
+        });
+    }
 
     function query() {
       return Object.keys($scope.query).map(function (key) {
@@ -107,12 +115,13 @@ angular.module('mtgSnatchApp')
     $scope.addToCollection = addToCollection;
     $scope.removeFromCollection =removeFromCollection;
     
-    $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: ''};
+    $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: '', rarity: ''};
     $scope.sets = [];
     $scope.types = [];
     $scope.subtypes = [];
     $scope.legalities = [];
     $scope.colors = [];
+    $scope.rarities = [];
     
     $scope.collection = new Map();
 
@@ -122,5 +131,6 @@ angular.module('mtgSnatchApp')
     loadSubtypes();
     loadLegalities();
     loadColors();
-
+    loadRarities();
+    
   });
