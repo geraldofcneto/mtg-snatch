@@ -11,7 +11,13 @@ angular.module('mtgSnatchApp')
   .controller('CardsCtrl', function ($scope, $http, envService) {
     var server = envService.read('apiUrl');
     
-    function loadCardNames() {
+    function onQueryChange(){
+      if ($scope.config.loadOnChange){
+        loadCards();
+      }
+    }
+    
+    function loadCards() {
       if (!query().length) { return; }
       $http.get(server + 'card/?' + query())
         .then(function (response) {
@@ -94,13 +100,14 @@ angular.module('mtgSnatchApp')
         }
       });
     }
-    
-    $scope.loadCardNames = loadCardNames;
+
+    $scope.onQueryChange = onQueryChange;
+    $scope.loadCards = loadCards;
     $scope.hasImage = hasImage;
     $scope.addToCollection = addToCollection;
     $scope.removeFromCollection =removeFromCollection;
     
-    $scope.query = { name: '', set: '', type: '', subtype: '', legality: '', color: ''};
+    $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: ''};
     $scope.sets = [];
     $scope.types = [];
     $scope.subtypes = [];
@@ -109,6 +116,7 @@ angular.module('mtgSnatchApp')
     
     $scope.collection = new Map();
 
+    $scope.config = { loadOnChange: true };
     loadSets();
     loadTypes();
     loadSubtypes();

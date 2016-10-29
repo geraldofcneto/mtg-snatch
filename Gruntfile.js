@@ -33,16 +33,16 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
-    aws: grunt.file.readJSON("aws-credentials.json"),
+    aws: grunt.file.readJSON('aws-credentials.json'),
     s3: {
       options: {
-        accessKeyId: "<%= aws.accessKeyId %>",
-        secretAccessKey: "<%= aws.secretAccessKey %>",
-        bucket: "mtg-snatch2"
+        accessKeyId: '<%= aws.accessKeyId %>',
+        secretAccessKey: '<%= aws.secretAccessKey %>',
+        bucket: 'mtg-snatch2'
       },
       build: {
-        cwd: "dist/",
-        src: "**"
+        cwd: 'dist/',
+        src: '**'
       }
     },
 

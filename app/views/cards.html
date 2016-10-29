@@ -1,7 +1,11 @@
 <label>Name</label>
-<input ng-change="loadCardNames()" ng-model="query.name" ng-model-options='{ debounce: 1000 }'>
+<input ng-change="onQueryChange()" ng-model="query.name" ng-model-options='{ debounce: 1000 }'>
+<label>Text</label>
+<input ng-change="onQueryChange()" ng-model="query.text" ng-model-options='{ debounce: 1000 }'>
+<label>Flavor</label>
+<input ng-change="onQueryChange()" ng-model="query.flavor" ng-model-options='{ debounce: 1000 }'>
 
-<ui-select multiple ng-model="query.set" theme="bootstrap" style="width: 300px;" title="Choose card set" ng-change="loadCardNames()">
+<ui-select multiple ng-model="query.set" theme="bootstrap" style="width: 300px;" title="Choose card set" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card set...">
 		[{{$item.code}}] {{$item.name}} {{$item.block? '- ' + $item.block : ''}}
 	</ui-select-match>
@@ -10,33 +14,37 @@
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.color" theme="bootstrap" style="width: 300px;" title="Choose card colors" ng-change="loadCardNames()">
+<ui-select multiple ng-model="query.color" theme="bootstrap" style="width: 300px;" title="Choose card colors" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card colors...">{{$item.name}}</ui-select-match>
 	<ui-select-choices repeat="color.symbol as color in colors | filter: $select.search">
 		{{color.name}}
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.type" theme="bootstrap" style="width: 300px;" title="Choose card types" ng-change="loadCardNames()">
+<ui-select multiple ng-model="query.type" theme="bootstrap" style="width: 300px;" title="Choose card types" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card types...">{{$item}}</ui-select-match>
 	<ui-select-choices repeat="type in types | filter: $select.search">
 		{{type}}
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.subtype" theme="bootstrap" style="width: 300px;" title="Choose card subtypes" ng-change="loadCardNames()">
+<ui-select multiple ng-model="query.subtype" theme="bootstrap" style="width: 300px;" title="Choose card subtypes" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card subtypes...">{{$item}}</ui-select-match>
 	<ui-select-choices repeat="subtype in subtypes | filter: $select.search">
 		{{subtype}}
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.legality" theme="bootstrap" style="width: 300px;" title="Choose card legality" ng-change="loadCardNames()">
+<ui-select multiple ng-model="query.legality" theme="bootstrap" style="width: 300px;" title="Choose card legality" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card legality...">{{$item}}</ui-select-match>
 	<ui-select-choices repeat="legality in legalities | filter: $select.search">
 		{{legality}}
 	</ui-select-choices>
 </ui-select>
+
+<label>
+	<input type="checkbox" ng-model="config.loadOnChange">Run search on change
+</label>
 
 <div ng-repeat="card in loadedCards | filter: hasImage " class="card-image float-card">
 	<div class="collection-overlay">
