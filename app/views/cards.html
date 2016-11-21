@@ -1,9 +1,19 @@
-<label>Name</label>
-<input ng-change="onQueryChange()" ng-model="query.name" ng-model-options='{ debounce: 1000 }'>
-<label>Text</label>
-<input ng-change="onQueryChange()" ng-model="query.text" ng-model-options='{ debounce: 1000 }'>
-<label>Flavor</label>
-<input ng-change="onQueryChange()" ng-model="query.flavor" ng-model-options='{ debounce: 1000 }'>
+<p>
+	<label>Name</label>
+	<input ng-change="onQueryChange()" ng-model="query.name" ng-model-options='{ debounce: 1000 }'>
+</p>
+<p>
+	<label>CMC</label>
+	<input ng-change="onQueryChange()" ng-model="query.cmc" ng-model-options='{ debounce: 1000 }'>
+</p>
+<p>
+	<label>Text</label>
+	<input ng-change="onQueryChange()" ng-model="query.text" ng-model-options='{ debounce: 1000 }'>
+</p>
+<p>
+	<label>Flavor</label>
+	<input ng-change="onQueryChange()" ng-model="query.flavor" ng-model-options='{ debounce: 1000 }'>
+</p>
 
 <ui-select multiple ng-model="query.set" theme="bootstrap" style="width: 300px;" title="Choose card set" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card set...">
@@ -53,18 +63,19 @@
 	<input type="checkbox" ng-model="config.loadOnChange">Run search on change
 </label>
 
-<div ng-repeat="card in loadedCards | filter: hasImage " class="card-image float-card">
-	<div class="collection-overlay">
-		<div class="badge collection-have">
-			Have {{card.have}} 
-			<span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="removeFromCollection(card.id)" ng-show="card.have"></span>
-			<span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addToCollection(card.id)"></span>
-		</div>
-		<div class="badge collection-want">Want</div>
-		<!-- 
+<div>
+	<div ng-repeat="card in loadedCards | filter: hasImage " class="card-image float-card">
+		<div class="collection-overlay">
+			<div class="badge collection-have">
+				Have {{card.have}}
+				<span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="removeFromCollection(card.id)" ng-show="card.have"></span>
+				<span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addToCollection(card.id)"></span>
+			</div>
+			<div class="badge collection-want">Want</div>
+			<!-- 
 		<div class="badge collection-trade">Trade</div> 
 		-->
+		</div>
+		<div afkl-lazy-image="{{card.imageUrl}}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname" afkl-lazy-image-options='{imgAttrs: [{alt: "{{card.name}}"}]}'></div>
 	</div>
-	<div afkl-lazy-image="{{card.imageUrl}}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname" 
-	afkl-lazy-image-options='{imgAttrs: [{alt: "{{card.name}}"}]}' ></div>
 </div>

@@ -115,7 +115,7 @@ angular.module('mtgSnatchApp')
     $scope.addToCollection = addToCollection;
     $scope.removeFromCollection =removeFromCollection;
     
-    $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: '', rarity: ''};
+    $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: '', rarity: '', cmc: ''};
     $scope.sets = [];
     $scope.types = [];
     $scope.subtypes = [];
