@@ -68,8 +68,14 @@ angular.module('mtgSnatchApp')
     function loadRarities() {
       $http.get(server + 'rarity')
         .then(function (response) {
-          console.log(response, response.data);
           $scope.rarities = response.data;
+        });
+    }
+    
+    function loadLanguages() {
+      $http.get(server + 'languages')
+        .then(function (response) {
+          $scope.languages = response.data;
         });
     }
 
@@ -108,12 +114,29 @@ angular.module('mtgSnatchApp')
         }
       });
     }
+    
+    function imageFromCard(card) {
+      if (!$scope.query.language){
+        return card.imageUrl;
+      }
+      
+      var image = imageInLanguage(card, $scope.query.language);
+      
+      return image ? image.imageUrl : card.imageUrl;
+    }
+    
+    function imageInLanguage(card, language){
+      return card.foreignNames.find(function (foreignName) { 
+        return foreignName.language == language;
+      });
+    }
 
     $scope.onQueryChange = onQueryChange;
     $scope.loadCards = loadCards;
     $scope.hasImage = hasImage;
     $scope.addToCollection = addToCollection;
     $scope.removeFromCollection =removeFromCollection;
+    $scope.imageFromCard = imageFromCard;
     
     $scope.query = { name: '', text: '', flavor: '', set: '', type: '', subtype: '', legality: '', color: '', rarity: '', cmc: ''};
     $scope.sets = [];
@@ -122,6 +145,7 @@ angular.module('mtgSnatchApp')
     $scope.legalities = [];
     $scope.colors = [];
     $scope.rarities = [];
+    $scope.languages = [];
     
     $scope.collection = new Map();
 
@@ -132,5 +156,5 @@ angular.module('mtgSnatchApp')
     loadLegalities();
     loadColors();
     loadRarities();
-    
+    loadLanguages();
   });

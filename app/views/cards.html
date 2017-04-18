@@ -59,12 +59,21 @@
 	</ui-select-choices>
 </ui-select>
 
+<ui-select ng-model="query.language" theme="bootstrap" style="width: 300px;" title="Choose card prefered language" ng-change="onQueryChange()">
+	<ui-select-match placeholder="Select or search card prefered language...">{{$select.selected}}</ui-select-match>
+	<ui-select-choices repeat="language in languages | filter: $select.search">
+		{{language}}
+	</ui-select-choices>
+</ui-select>
+
 <label>
 	<input type="checkbox" ng-model="config.loadOnChange">Run search on change
 </label>
 
+
+
 <div>
-	<div ng-repeat="card in loadedCards | filter: hasImage " class="card-image float-card">
+	<div ng-repeat="card in loadedCards | filter: hasImage | orderBy: order" class="card-image float-card">
 		<div class="collection-overlay">
 			<div class="badge collection-have">
 				Have {{card.have}}
@@ -76,6 +85,6 @@
 		<div class="badge collection-trade">Trade</div> 
 		-->
 		</div>
-		<div afkl-lazy-image="{{card.imageUrl}}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname" afkl-lazy-image-options='{imgAttrs: [{alt: "{{card.name}}"}]}'></div>
+		<div afkl-lazy-image="{{imageFromCard(card)}}" class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname" afkl-lazy-image-options='{imgAttrs: [{alt: "{{card.name}}"}]}'></div>
 	</div>
 </div>
