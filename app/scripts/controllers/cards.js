@@ -20,39 +20,37 @@ angular.module('mtgSnatchApp')
 
     function loadCards() {
       $http.get(mtgio + 'cards?' + query())
-        .then((response) => $scope.loadedCards = response.data.cards)
-        /*
-        if (!query().length) { return }
-        $http.get(server + 'card/?' + query())
-          .then(function (response) {
-            $scope.loadedCards = response.data.slice(0, 1000);
-            $scope.mappedCards = new Map();
-            $scope.loadedCards.forEach(function (card){
-              $scope.mappedCards.set(card.id, card);
-            });
-            updateLoadedCards();
-          });
-          */
+        .then(function(response) {
+          $scope.loadedCards = response.data.cards
+        })
     }
 
     function loadSets() {
       $http.get(mtgio + 'sets')
-        .then((response) => $scope.sets = response.data.sets);
+        .then(function(response) {
+          $scope.sets = response.data.sets
+        });
     }
 
     function loadTypes() {
       $http.get(mtgio + 'types')
-        .then((response) => $scope.types = response.data.types);
+        .then(function(response) {
+          $scope.types = response.data.types
+        });
     }
 
     function loadSubtypes() {
       $http.get(mtgio + 'subtypes')
-        .then((response) => $scope.subtypes = response.data.subtypes);
+        .then(function(response) {
+          $scope.subtypes = response.data.subtypes
+        });
     }
 
     function loadLegalities() {
       $http.get(mtgio + 'formats')
-        .then((response) => $scope.legalities = response.data.formats);
+        .then(function(response) {
+          $scope.legalities = response.data.formats
+        });
     }
 
     function loadColors() {
