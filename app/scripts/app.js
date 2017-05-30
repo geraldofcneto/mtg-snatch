@@ -52,24 +52,22 @@ angular
     envServiceProvider.config({
       domains: {
         development: ['localhost', 'dev.local'],
-        c9: ['mtg-snatch-geraldofcneto.c9users.io'],
-        production: ['geraldofcneto.github.io/mtg-snatch', 'mtg-snatch2.s3-website-us-east-1.amazonaws.com', 'acme.org']
+        c9: ['mtg-snatch-io-geraldofcneto.c9users.io'],
+        production: ['geraldofcneto.github.io/mtg-snatch-io', 'mtg-snatch2.s3-website-us-east-1.amazonaws.com', 'acme.org']
       },
       vars: {
         development: {
           apiUrl: '//localhost:8888/',
-          staticUrl: '//localhost/static'
-          // antoherCustomVar: 'lorem', 
-          // antoherCustomVar: 'ipsum' 
+          staticUrl: '//localhost/static',
+          mtgio: 'https://api.magicthegathering.io/v1/'
           },
         production: {
-          apiUrl: '//ec2-54-218-155-189.us-west-2.compute.amazonaws.com/',
-          staticUrl: '//static.acme.com'
-          // antoherCustomVar: 'lorem', 
-          // antoherCustomVar: 'ipsum' 
+          apiUrl: '//mtg-collection-api.herokuapp.com/',
+          mtgio: 'https://api.magicthegathering.io/v1/'
         },
         c9: {
-          apiUrl: '//mtg-collection-geraldofcneto.c9users.io/'
+          apiUrl: '//mtg-collection-api.herokuapp.com/',
+          mtgio: 'https://api.magicthegathering.io/v1/'
         }
       }
     });

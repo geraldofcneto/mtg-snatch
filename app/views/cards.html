@@ -24,9 +24,9 @@
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.color" theme="bootstrap" style="width: 300px;" title="Choose card colors" ng-change="onQueryChange()">
+<ui-select multiple ng-model="query.colors" theme="bootstrap" style="width: 300px;" title="Choose card colors" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card colors...">{{$item.name}}</ui-select-match>
-	<ui-select-choices repeat="color.symbol as color in colors | filter: $select.search">
+	<ui-select-choices repeat="color.name as color in colors | filter: $select.search">
 		{{color.name}}
 	</ui-select-choices>
 </ui-select>
