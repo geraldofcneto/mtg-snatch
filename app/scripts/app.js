@@ -53,7 +53,7 @@ angular
       domains: {
         development: ['localhost', 'dev.local'],
         c9: ['mtg-snatch-io-geraldofcneto.c9users.io'],
-        production: ['geraldofcneto.github.io/mtg-snatch-io', 'mtg-snatch2.s3-website-us-east-1.amazonaws.com', 'mtg-snatch.herokuapp.com']
+        production: ['geraldofcneto.github.io/mtg-snatch', 'mtg-snatch2.s3-website-us-east-1.amazonaws.com', 'mtg-snatch.herokuapp.com']
       },
       vars: {
         development: {
