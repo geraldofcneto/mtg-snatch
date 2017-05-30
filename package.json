@@ -40,7 +40,8 @@
   },
   "scripts": {
     "test": "karma start test/karma.conf.js",
-    "c9": "grunt serve --app_port=8080 --livereload_port=8081"
+    "c9": "grunt serve --app_port=8080 --livereload_port=8081",
+    "start": "grunt serve --app_port=$PORT"
   },
   "dependencies": {
     "mtgsdk": "^0.2.0"
