@@ -139,7 +139,7 @@ angular.module('mtgSnatchApp')
       flavor: '',
       set: '',
       type: '',
-      subtype: '',
+      subtypes: '',
       legality: '',
       colors: '',
       rarity: '',

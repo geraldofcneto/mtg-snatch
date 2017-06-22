@@ -45,7 +45,7 @@
 	</ui-select-choices>
 </ui-select>
 
-<ui-select multiple ng-model="query.subtype" theme="bootstrap" style="width: 300px;" title="Choose card subtypes" ng-change="onQueryChange()">
+<ui-select multiple ng-model="query.subtypes" theme="bootstrap" style="width: 300px;" title="Choose card subtypes" ng-change="onQueryChange()">
 	<ui-select-match placeholder="Select or search card subtypes...">{{$item}}</ui-select-match>
 	<ui-select-choices repeat="subtype in subtypes | filter: $select.search">
 		{{subtype}}
